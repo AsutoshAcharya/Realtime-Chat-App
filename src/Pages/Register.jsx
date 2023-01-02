@@ -5,9 +5,13 @@ import { auth, db, storage } from "../firebase";
 import { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [err, setErr] = useState(false);
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target[0].value;
@@ -68,6 +72,9 @@ const Register = () => {
               email: email,
               photoURL: downloadURL,
             });
+
+            await setDoc(doc(db, "userChats", response.user.uid), {});
+            navigate("/");
           });
         }
       );
