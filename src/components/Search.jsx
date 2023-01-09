@@ -45,7 +45,7 @@ const Search = () => {
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
       if (!res.exists()) {
-        await setDoc(doc, (db, "chats", combinedId), { messages: [] });
+        await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
@@ -67,6 +67,8 @@ const Search = () => {
     } catch (err) {
       setErr(true);
     }
+    setUser(null);
+    setUserName("");
   };
   return (
     <div className="search">
@@ -78,6 +80,7 @@ const Search = () => {
             setUserName(e.target.value);
           }}
           onKeyDown={handleKey}
+          value={username}
         />
       </div>
       {err && <span>User not found!</span>}
