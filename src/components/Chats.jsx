@@ -22,46 +22,17 @@ const Chats = () => {
   console.log(Object.entries(chats));
   return (
     <div className="chats">
-      <div className="userChat">
-        <img
-          src="https://avatars.githubusercontent.com/u/101463745?v=4"
-          alt=""
-        />
-        <div className="userChatInfo">
-          <span>Asutosh</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      <div className="userChat">
-        <img
-          src="https://avatars.githubusercontent.com/u/101463745?v=4"
-          alt=""
-        />
-        <div className="userChatInfo">
-          <span>Asutosh</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      <div className="userChat">
-        <img
-          src="https://avatars.githubusercontent.com/u/101463745?v=4"
-          alt=""
-        />
-        <div className="userChatInfo">
-          <span>Asutosh</span>
-          <p>Hello</p>
-        </div>
-      </div>
-      <div className="userChat">
-        <img
-          src="https://avatars.githubusercontent.com/u/101463745?v=4"
-          alt=""
-        />
-        <div className="userChatInfo">
-          <span>Asutosh</span>
-          <p>Hello</p>
-        </div>
-      </div>
+      {Object.entries(chats).map((chat) => {
+        return (
+          <div className="userChat" key={chat[0]}>
+            <img src={chat[1].userInfo.photoURL} alt="" />
+            <div className="userChatInfo">
+              <span>{chat[1].userInfo.displayName}</span>
+              <p>{chat[1].userInfo.lastMessage?.text}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
